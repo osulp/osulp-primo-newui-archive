@@ -1,0 +1,44 @@
+prm-topbar .prm-primary-bg.prm-hue1, prm-browse-search-bar.prm-hue1, prm-journals-search-bar.prm-hue1, prm-search-bar.prm-hue1, prm-spinner.prm-hue1.overlay-cover.light-on-dark::after, prm-tags-search-bar.prm-hue1, prm-topbar .top-nav-bar { background-color: #dc4405; }
+
+prm-topbar .md-toolbar-tools { background-color: #dc4405; font-size: 110%; }
+
+div.md-fab-action-item { font-weight: bold; color: white; }
+
+.prm-primary-bg, prm-browse-search-bar, prm-journals-search-bar, prm-search-bar, prm-spinner.overlay-cover.light-on-dark::after, prm-tags-search-bar { background-color: #000; }
+
+prm-main-menu[menu-type="menu"] .md-button {
+    font-size: 1em;
+    text-transform: none;
+}
+
+.md-button.button-confirm, .service-form-static-panel button.button-confirm prm-icon + span, .service-form-static-panel button.button-confirm prm-icon svg path { color: black; }
+
+.view-switcher > a:nth-child(1) { display: none; }
+
+.switch-to-advanced, button.switch-to-simple:nth-child(1) { font-size: 130%; font-weight: bold; }
+
+body, .md-chips { font-family: Arial, sans-serif; !important }
+
+button.user-menu-button:nth-child(2) > div:nth-child(1) > span:nth-child(1), #main\ menu a { color: white; }
+
+prm-logo .product-logo { padding: 0; }
+
+md-tab-item.md-tab:nth-child(3) { display: none; }
+
+span[translate="mainmenu.label.interlibrary_loan"] { padding-right: 10px; }
+
+/* Hide Tags in Detailed Display */
+[aria-label="Tags"] { display:none; }
+#tags { display:none; }
+
+/* Hide Tags in Menu Tab */
+a.md-button[aria-label="Tags"] { display:none; }
+a.md-button[aria-label="nui.mainmenu.label.tags"] { display:none; }
+
+.WC_hide { display:none; } 
+
+
+@media (max-width: 600px)
+{
+    
+}

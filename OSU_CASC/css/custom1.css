@@ -1,0 +1,26 @@
+prm-main-menu[menu-type="menu"] .md-button {
+    font-size: 1em;
+    text-transform: none;
+}
+
+/* Call the clickable logo and hide the upper Out-of-Box Logo*/
+prm-logo .product-logo {
+    display: none;
+}
+prm-logo div.product-logo-local {
+    display: flex;
+}
+prm-logo .logo-image, prm-logo img {
+    max-height: 100%;
+}
+
+@media (max-width: 600px)
+{        
+    md-divider { display: none; }
+    
+    md-card.zero-margin:nth-child(2) > div:nth-child(1) { display: flex; }
+    
+    md-card.zero-margin:nth-child(2) > div:nth-child(1) > md-input-container:nth-child(1), md-card.zero-margin:nth-child(2) > div:nth-child(1) > md-input-container:nth-child(2), md-card.zero-margin:nth-child(2) > div:nth-child(1) > md-input-container:nth-child(3) { /*max-width: 30%;*/ display: flex; justify-content: space-around;  }
+    
+    
+}
