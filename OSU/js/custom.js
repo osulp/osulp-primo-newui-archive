@@ -4,6 +4,11 @@
 
 var app = angular.module('viewCustom', ['angularLoad']);
    
+app.component('prmSearchBookmarkFilterAfter', {
+    bindings: {},
+    template: '<div id="libchat_08b86f0a32dfba73434ea6bd81aef1ac"></div><script src="https://v2.libanswers.com/load_chat.php?hash=08b86f0a32dfba73434ea6bd81aef1ac"></script>'
+});    
+    
 app.component('prmAlmaMoreInstAfter', {
     controller: 'institutionToggleController',
     template: '<md-button class="md-raised" ng-click="toggleLibs()">\n\t\t\t{{ showLibs ? \'Hide Libraries &laquo;\' : \'Show Libraries &raquo;\' }}\n\t\t\t</md-button>'
