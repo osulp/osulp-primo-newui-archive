@@ -6,7 +6,7 @@ var app = angular.module('viewCustom', ['angularLoad']);
    
 app.component('prmSearchBookmarkFilterAfter', {
     bindings: {},
-    template: '<div id="libchat_08b86f0a32dfba73434ea6bd81aef1ac"></div><script src="https://v2.libanswers.com/load_chat.php?hash=08b86f0a32dfba73434ea6bd81aef1ac"></script>'
+    template: '<div class="chat"><a ng-href="http://answers.library.oregonstate.edu/widget_standalone.php?hash=848ad121b384a3768c03838752654abb" target="_blank">Chat</a></div>'
 });    
     
 app.component('prmAlmaMoreInstAfter', {
