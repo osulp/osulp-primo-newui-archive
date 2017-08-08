@@ -47,6 +47,7 @@ div.chat {
     font-size: 1.3em;
     border-radius: 8px !important;
     border: 2px solid #ffffff !important;
+    margin: 0 .5em; 
 }
 
 div.chat a { color: white !important; }
