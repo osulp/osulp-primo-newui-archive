@@ -7,7 +7,7 @@ var app = angular.module('viewCustom', ['angularLoad']);
 app.component('prmSearchBookmarkFilterAfter', {
     bindings: {},
     template: '<div class="chat"><a ng-href="http://answers.library.oregonstate.edu/widget_standalone.php?hash=848ad121b384a3768c03838752654abb" target="_blank">Chat</a></div>'
-});    
+}); 
     
 app.component('prmAlmaMoreInstAfter', {
     controller: 'institutionToggleController',
@@ -122,24 +122,12 @@ app.component('prmAuthenticationAfter', {
             }
         };
     }
-});    
+});  
     
+app.component('prmActionListAfter', {  
+    this.$onInit = function () {
+        angular.element(document.querySelector('#RISPushTo > button > span > div > span')).text("Export RIS & EndNote");    
+    };
+});
+     
 })();
-
-/*
-
-function hide_show_other_institutions() {
-  if (angular.element(document.querySelector('md-tabs')).hasClass("hide")) {
-    angular.element(document.querySelector('md-tabs')).removeClass("hide");
-    angular.element(document.getElementsByClassName('hide_show_other_institutions_button')).text("Hide Libraries");
-  } else {
-    angular.element(document.querySelector('md-tabs')).addClass("hide");
-    angular.element(document.getElementsByClassName('hide_show_other_institutions_button')).text("Show Libraries");
-  }
-
-  // place button above list of libraries 
-  angular.element(document.querySelector('prm-alma-more-inst-after')).after(angular.element(document.querySelector('prm-alma-more-inst md-tabs')));
-}
-*/
-
-

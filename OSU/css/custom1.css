@@ -63,6 +63,10 @@ div.result-item-image > div.media-content-images {
     max-height: 60px;
 }
 
+.saved-query-list > md-nav-bar .md-nav-item, prm-action-list > md-nav-bar .md-nav-item {
+    max-width: none; 
+}
+
 @media (max-width: 600px)
 {
     
