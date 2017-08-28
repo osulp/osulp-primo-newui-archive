@@ -67,6 +67,39 @@ div.result-item-image > div.media-content-images {
     max-width: none; 
 }
 
+/* Hide Language option in Additional Main Menu options overlay */
+prm-change-lang {
+display: none;
+}
+ 
+/* Hide globe icon in Additional Main Menu options overlay */
+md-icon[aria-label="icon-earth"] {
+display: none;
+}
+
+prm-main-menu .top-nav-bar-links>a[aria-label="Browse"] {
+  display: none;
+}
+
+prm-main-menu[menu-type="full"] div.custom-links-container > md-card:last-child {
+    display:none;
+}
+
+html#primoExploreRoot body primo-explore.__lgPlus.__gt-xs.__gt-sm.__gt-md div prm-account md-content.padded-container.layout-fill._md.md-primoExplore-theme.layout-align-center-start.layout-row div.main.layout-row.flex prm-account-overview.layout-fill md-content#accountoverview._md.md-primoExplore-theme.flex md-tabs.static-tabs.default-tabs.md-dynamic-height.md-primoExplore-theme md-tabs-content-wrapper._md md-tab-content#tab-content-7._md.md-no-scroll.md-active div div.layout-row prm-personal-info.flex div.layout-wrap.layout-align-center-start.layout-row md-card.default-card._md.md-primoExplore-theme.flex-xs-100.flex-sm-100 {
+    display: none; 
+}
+
+span[translate="nui.loan.due"] {
+    color: black;
+    font-weight: bold; 
+}
+
+.weak-text { color: #545454; }
+
+#main\20 menu > a:nth-child(2) > span {
+    max-width: inherit; 
+}
+
 @media (max-width: 600px)
 {
     
