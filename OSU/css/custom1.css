@@ -100,6 +100,19 @@ span[translate="nui.loan.due"] {
     max-width: inherit; 
 }
 
+prm-brief-result-container .media-content-type prm-search-result-frbr-line > span { 
+    font-weight: 600 !important; 
+}
+
+prm-brief-result-container .media-content-type prm-search-result-frbr-line a span {
+    background-color: #dc4405;
+    padding: 0px 3px;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid #dc4405;
+    text-transform: none; 
+}
+
 @media (max-width: 600px)
 {
     

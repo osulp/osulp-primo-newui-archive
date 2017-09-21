@@ -10,7 +10,8 @@ app.component('prmSearchBookmarkFilterAfter', {
     template: '<div class="chat"><a ng-href="http://answers.library.oregonstate.edu/widget_standalone.php?hash=848ad121b384a3768c03838752654abb" target="_blank">Live Chat</a></div>'
 }); 
 
-// show/hide borrowing institutions    
+
+// show/hide borrowing institutions   
 app.component('prmAlmaMoreInstAfter', {
     controller: 'institutionToggleController',
     template: '<md-button class="md-raised" ng-click="toggleLibs()">\n\t\t\t{{ showLibs ? \'Hide Libraries &laquo;\' : \'Show Libraries &raquo;\' }}\n\t\t\t</md-button>'
@@ -26,7 +27,8 @@ app.component('prmAlmaMoreInstAfter', {
             if ($scope.tabs.hasClass('hide')) $scope.tabs.removeClass('hide');else $scope.tabs.addClass('hide');
         };
     };
-}]);
+}]); 
+
 
 // add Google Scholar and Worldcat search in facet pane   
 app.component('prmFacetExactAfter', {
@@ -49,71 +51,71 @@ app.component('prmFacetExactAfter', {
     template: '<div class="{{$ctrl.class}}"><div aria-label="Search in Worldcat" class="section-title md-button md-primoExplore-theme md-ink-ripple layout-fill" style="" ><div class="layout-align-start-center layout-row"><h3 class="section-title-header"><span title="External Search" translate="External Search"></span></h3></div><div class="md-ripple-container"></div></div><div aria-hidden="false" class="section-content animate-max-height-variable" style=""><div class="md-chips md-chips-wrap"><div aria-live="polite" class="md-chip animate-opacity-and-scale facet-element-marker-local4"><div class="md-chip-content layout-row" role="button" tabindex="0"><strong dir="auto" title="Search Worldcat" ><a href="https://www.worldcat.org/search?qt=worldcat_org_all&q={{$ctrl.query}}" target="_blank"><img src="https://cdn.rawgit.com/Alliance-PCJWG/primo-explore-worldcat-button/7ee112df/img/worldcat-logo.png" width="22" height="22" alt="worldcat-logo" style="vertical-align:middle;"> Search Worldcat</a></strong></div></div><div aria-live="polite" class="md-chip animate-opacity-and-scale facet-element-marker-local4"><div class="md-chip-content layout-row" role="button" tabindex="0"><strong dir="auto" title="Search Google Scholar" ><a href="https://scholar.google.com/scholar?q={{$ctrl.query}}" target="_blank"> <img src="custom/OSU/img/gscholar.png" width="22" height="22" alt="google-scholar-logo" style="vertical-align:middle;"> Google Scholar</a></strong></div></div></div></div>'
 });   
     
-// add oaDOI api search for resources outside of iframe    
+/* add oaDOI api search for resources outside of iframe  - disabled 9/21 due to errors  
 app.component('prmFullViewServiceContainerAfter', {
   bindings: { parentCtrl: '<' },
-    controller: function controller($scope, $http, $q, $element) {
+    controller: function controller($scope, $http, $element, oadoiService, oadoiOptions) {
         this.$onInit = function() {
-            $scope.oaDisplay=false; /* default hides template */      
-            var section=$scope.$parent.$ctrl.service.scrollId;
-            var obj=$scope.$ctrl.parentCtrl.item.pnx.addata;
-            if (obj.hasOwnProperty("doi")){
-                var doi=obj.doi[0];           
-                console.log("doi:"+doi)
-                if (doi && section=="getit_link1_0"){
-                    var url="https://api.oadoi.org/"+doi;
-                    var promise = this.asyncGreet(url);
-                    promise.then(function(oalink) {
-                        console.log(oalink);                    
-                        if(oalink===null){
-                            $scope.oaDisplay=false;                        
-                            console.log("it's false");
-                            $scope.oaClass="ng-hide";                        
-                        }
-                        else{
-                            $scope.oalink=oalink;
-                            $scope.oaDisplay=true;
-                            $element.children().removeClass("ng-hide"); /* initially set by $scope.oaDisplay=false */
-                            $scope.oaClass="ng-show";
-                        }
-                    }, function(reason) {
-                        console.log(reason);
-                    }, function(update) {
-                        console.log(update);
-                    });
-                }
-                else{$scope.oaDisplay=false;                
-                }            
-            }
-            else{
-                $scope.oaClass="ng-hide";
-            }
-        };
-        this.asyncGreet=function (url) {
-          var deferred = $q.defer();
-            $http({
-                method: 'GET',
-                url: url,
-                headers: { "X-From-ExL-API-Gateway": undefined }
-            }).then(function successCallback(response, $scope) {
+        	$scope.oaDisplay=false; 
+          $scope.imagePath=oadoiOptions.imagePath;
+          var email=oadoiOptions.email;
+        	var section=$scope.$parent.$ctrl.service.scrollId;
+        	var obj=$scope.$ctrl.parentCtrl.item.pnx.addata;
+
+        	if (obj.hasOwnProperty("doi")){
+        		var doi=obj.doi[0];
+        		console.log("doi:"+doi)
+
+    				if (doi && section=="getit_link1_0"){
+    					var url="https://api.oadoi.org/v2/"+doi+"?email="+email;
+
+              var response=oadoiService.getOaiData(url).then(function(response){
                 console.log("it worked");
                 console.log(response);
-                var oalink=response.data.results[0].free_fulltext_url;
+                var oalink=response.data.best_oa_location.url;
                 console.log(oalink);
-                ///return oalink;
-                deferred.notify=oalink                    
-                deferred.resolve(oalink);
-            }, function errorCallback(response) {
-                console.log(response);
-                console.log("it didn't work");
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
-            });                
-            return deferred.promise;
-        }
+                if(oalink===null){
+                  $scope.oaDisplay=false;
+                  console.log("it's false");
+                  $scope.oaClass="ng-hide";
+                }
+                else{
+                  $scope.oalink=oalink;
+                  $scope.oaDisplay=true;
+                  $element.children().removeClass("ng-hide"); 
+                  $scope.oaClass="ng-show";
+                }
+
+              });
+
+
+    				}
+    				else{$scope.oaDisplay=false;
+    				}
+        	}
+        	else{
+        		$scope.oaClass="ng-hide";
+        	}
+        };
+
     },
-  template: '<div style="height:50px;background-color:white;padding:15px;" ng-show="{{oaDisplay}}" class="{{oaClass}}"><img src="custom/LCC/img/oa_50.png" style="float:left;height:22px;width:22px;margin-right:10px"><p >Full text available via: <a href="{{oalink}}" target="_blank" style="font-weight:600;font-size:15px;color;#2c85d4;">Open Access</a></p></div>'
-});    
+  template: '<div style="height:50px;background-color:white;padding:15px;" ng-show="{{oaDisplay}}" class="{{oaClass}}"><img src="{{imagePath}}" style="float:left;height:22px;width:22px;margin-right:10px"><p >Full text available via: <a href="{{oalink}}" target="_blank" style="font-weight:600;font-size:15px;color;#2c85d4;">Open Access</a></p></div>'
+}).factory('oadoiService', ['$http',function($http){
+  return{
+    getOaiData: function (url) {
+      return $http({
+        method: 'GET',
+        url: url,
+        cache: true
+      })
+    }
+  }
+}]).run(
+  ($http) => {
+    // Necessary for requests to succeed...not sure why
+    $http.defaults.headers.common = { 'X-From-ExL-API-Gateway': undefined }
+  },
+); */
    
 // force users to login despite services page they come from    
 app.component('prmAuthenticationAfter', {
@@ -126,7 +128,41 @@ app.component('prmAuthenticationAfter', {
         };
     }
 });  
+    
+/* force users to login when visiting the page
+    
+    function osu_signin_polling() {
+	console.log("psu_signin_polling");
+	var popup = angular.element(document.querySelector('prm-login'));
+	var username = angular.element(document.querySelector('prm-user-area .user-name'));
+	if(popup.length == 0 && (username.length == 0 || username.text().trim() == "" || username.text().toLowerCase().trim() == "guest" || username.text().toLowerCase().trim() == "eshelf.user.anonymous" || username.text().toLowerCase().trim() == "sign in"))
+	{
+		var show_login_result = angular.element(document.querySelector('button[aria-label="Sign in"]')).triggerHandler("click");
+		if(show_login_result.length > 0)
+		{
+			console.log("showing login popup");
+		}
+		else
+			setTimeout(osu_signin_polling, 100);
+	}
+	else
+	{
+		console.log("stopping polling");
+		console.log(popup.length);
+		console.log(username.length);
+		console.log("["+username.text()+"]");
+	}
+}
+
+
+angular.element(document).ready(function(){
+	if(window.location.search.search("&signin=true") > -1) {
+		osu_signin_polling();
+	}
+});
+*/
   
+
 })();
 
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -137,6 +173,7 @@ app.component('prmAuthenticationAfter', {
   ga('create', 'UA-35760875-20');
   ga('send', 'pageview');
   ga('set', 'anonymizeIp', true);
+
 
 
 /* In Progress 
